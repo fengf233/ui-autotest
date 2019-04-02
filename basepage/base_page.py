@@ -15,8 +15,16 @@ class Basepage():
     def finds(self,*key):
         return self.driver.find_elements(*key)
 
-    def wait_element(self,*key,time=2):
+    def wait_element(self,*key,timeout=2):
+        #
         def presence():
-            WebDriverWait(self.driver,time).until(EC.presence_of_element_located((*key)))
+            WebDriverWait(self.driver,timeout).until(EC.presence_of_element_located((*key)))
         def visibility():
-            WebDriverWait(self.driver,time).until(EC.presence_of_element_located((*key)))
+            WebDriverWait(self.driver,timeout).until(EC.visibility_of_element_located((*key)))
+        def invisibility():
+            WebDriverWait(self.driver,timeout).until(EC.invisibility_of_element_located((*key)))
+        def alert():
+            WebDriverWait(self.driver,timeout).until(EC.alert_is_present((*key)))
+        #自己选择显示等待条件
+        def until(*k):
+            WebDriverWait(self.driver,timeout).until(*k)
