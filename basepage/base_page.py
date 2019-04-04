@@ -44,7 +44,7 @@ class Basepage():
         def presence(self,*key,timeout=2,frequency=0.5):
             try:
                 log.info("等待元素出现: %s" %key[1])
-                WebDriverWait(self.driver,timeout,poll_frequency=frequency).until(EC.presence_of_element_located((*key)))
+                return WebDriverWait(self.driver,timeout,poll_frequency=frequency).until(EC.presence_of_element_located((*key)))
             except TimeoutException:
                 log.error("等待元素出现超时: %s" %key[1])
                 raise
@@ -52,7 +52,7 @@ class Basepage():
         def visibility(self,*key,timeout=2,frequency=0.5):
             try:
                 log.info("等待元素显示: %s" %key[1])
-                WebDriverWait(self.driver,timeout,poll_frequency=frequency).until(EC.visibility_of_element_located((*key)))
+                return WebDriverWait(self.driver,timeout,poll_frequency=frequency).until(EC.visibility_of_element_located((*key)))
             except TimeoutException:
                 log.error("等待元素显示超时: %s" %key[1])
                 raise
@@ -60,27 +60,30 @@ class Basepage():
         def invisibility(self,*key,timeout=2,frequency=0.5):
             try:
                 log.info("等待元素消失: %s" %key[1])
-                WebDriverWait(self.driver,timeout,poll_frequency=frequency).until(EC.invisibility_of_element_located((*key)))
+                return WebDriverWait(self.driver,timeout,poll_frequency=frequency).until(EC.invisibility_of_element_located((*key)))
             except TimeoutException:
                 log.error("等待元素消失超时: %s" %key[1])
                 raise
 
-        def alert(self,*key,timeout=2,frequency=0.5):
+        def alert(self,timeout=2,frequency=0.5):
             try:
-                log.info("等待弹窗出现: %s" %key[1])
-                WebDriverWait(self.driver,timeout,poll_frequency=frequency).until(EC.alert_is_present((*key)))
+                log.info("等待弹窗出现")
+                return WebDriverWait(self.driver,timeout,poll_frequency=frequency).until(EC.alert_is_present())
             except TimeoutException:
-                log.error("等待弹窗出现超时: %s" %key[1])
+                log.error("等待弹窗出现超时")
                 raise
 
-        def inalert(self,*key,timeout=2,frequency=0.5):
+        def inalert(self,timeout=2,frequency=0.5):
             try:
-                log.info("等待弹窗消失: %s" %key[1])
-                WebDriverWait(self.driver,timeout,poll_frequency=frequency).until_not(EC.alert_is_present((*key)))
+                log.info("等待弹窗消失")
+                return WebDriverWait(self.driver,timeout,poll_frequency=frequency).until_not(EC.alert_is_present())
             except TimeoutException:
-                log.error("等待弹窗消失超时: %s" %key[1])
+                log.error("等待弹窗消失超时")
                 raise
 
+        def custom(self,timeout=2,frequency=0.5):
+            return WebDriverWait(self.driver,timeout,poll_frequency=frequency)
+            
     def wait(self,seconds):
         log.info("界面等待%s秒"%seconds)
         time.sleep(seconds)
@@ -121,4 +124,24 @@ class Basepage():
             pass
         else:
             os.makedirs(file_path)
-        
+        img_name = file_path + time.strftime("%Y-%m-%d-%H%M", time.localtime()) + '.png'
+        try:
+            self.driver.get_screenshot_as_file(img_name)
+            log.info("截图保存为:%s"%file_path)
+        except Exception as e:
+            log.error("截图失败:%s"%e)
+
+    #检查元素的可用性
+
+    def judge_element(self):
+        return self.Judge_element(self.driver)
+
+    class Judge_element():
+
+
+        def __init__(self,driver):
+            self.driver = driver
+
+        def 
+
+    
