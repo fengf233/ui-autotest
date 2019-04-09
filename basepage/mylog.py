@@ -16,7 +16,7 @@ class Log():
         # 在进程路径创建log文件夹
         # self.log_path = os.path.join(os.getcwd() + "\\log")
         # 固定在mylog上一级创建
-        self.log_path = os.path.join(os.path.split(os.path.dirname(os.path.abspath(__file__)))[0] + "\\log")
+        self.log_path = os.path.join(os.path.dirname(os.path.dirname(__file__)) + "\\log")
         if os.path.exists(self.log_path) and os.path.isdir(self.log_path):
             pass
         else:
