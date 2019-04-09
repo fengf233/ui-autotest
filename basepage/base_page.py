@@ -2,6 +2,7 @@ from basepage import mylog
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver import ActionChains
 from selenium.common.exceptions import *
 import time,os
 log = mylog.Log().getlog()
@@ -14,6 +15,14 @@ class Basepage():
     #查找元素
 
     def find(self,*key):
+        '''
+        e.g.
+            self.find(By.ID,"test")
+        
+        返回webelement对象,可以使用其所有方法
+        e.g.
+            self.find(By.ID,"test").click()
+        '''
         try:
             return self.driver.find_element(*key)
         except NoSuchElementException:
@@ -24,6 +33,12 @@ class Basepage():
             raise
 
     def finds(self,*key):
+        '''
+        e.g.
+            self.finds(By.ID,"test")
+        
+        返回webelement对象列表,可以使用其所有方法
+        '''
         try:
             return self.driver.find_elements(*key)
         except NoSuchElementException:
@@ -32,8 +47,19 @@ class Basepage():
         except TimeoutException:
             log.error("查找元素超时: %s" %key[1])
             raise
+    
+    #界面等待
 
     def wait_element(self):
+        '''
+        显性等待
+        -presence 等待元素出现在DOM,有则返回webelement对象 e.g. self.wait_element().presence(By.ID,"test")
+        -visibility 等待元素显示在界面,有则返回webelement对象 e.g. self.wait_element().visibility(By.ID,"test")
+        -invisibility 等待元素消失在界面 e.g. self.wait_element().invisibility(By.ID,"test")
+        -alert 等待弹窗出现 e.g. self.wait_element().alert(timeout=10)
+        -inalert 等待弹窗消失 e.g. self.wait_element().inalert(timeout=10)
+        -custom 自定义 self.wait_element.custom().until(self.judge_element().title_is)
+        '''
         return self.Wait_element(self.driver)
 
     class Wait_element():
@@ -82,9 +108,10 @@ class Basepage():
                 raise
 
         def custom(self,timeout=2,frequency=0.5):
+            #自定义 self.wait_element.custom().until(self.judge_element().title_is)
             return WebDriverWait(self.driver,timeout,poll_frequency=frequency)
-            
-    def wait(self,seconds):
+
+    def sleep(self,seconds):
         log.info("界面等待%s秒"%seconds)
         time.sleep(seconds)
 
@@ -95,12 +122,36 @@ class Basepage():
     #界面操作
 
     def get_url(self):
-        log.info("当前页面的url: %s" % self.driver.title)
+        log.info("当前页面的url: %s" % self.driver.current_url)
         return self.driver.current_url
 
     def get_title(self):
         log.info("当前页面的title: %s" % self.driver.title)
         return self.driver.title
+
+    def click(self,*key):
+        '''
+        e.g. self.click(By.ID,"test")
+        '''
+        log.info('点击元素：%s' %key[1])
+        try:
+            self.find(*key).click()
+        except:
+            log.error("无法点击元素")
+            raise
+
+    def send_key(self,key,text):
+        '''
+        e.g. self.send_key((By.ID,"test"),"11111")
+        '''
+        log.info('清空输入框内容')
+        self.find(*key).clear()
+        log.info('输入内容: %s' %text)
+        try:
+            self.find(*key).send_keys(text)
+        except:
+            log.error("输入内容失败")
+            raise
 
     def quit(self):
         self.driver.quit()
@@ -113,13 +164,17 @@ class Basepage():
     def forward(self):
         self.driver.forward()
         log.info("前进一个界面")
+    
+    def refresh(self):
+        self.driver.refresh()
+        log.info("刷新界面")
 
     def back(self):
         self.driver.back()
         log.info("前进一个界面")
 
     def get_screenshot(self):
-        file_path = './report/'+type(self).__name__+'/screenshot/'
+        file_path = '../report/'+type(self).__name__+'/screenshot/'
         if os.path.exists(file_path) and os.path.isdir(file_path):
             pass
         else:
@@ -127,21 +182,89 @@ class Basepage():
         img_name = file_path + time.strftime("%Y-%m-%d-%H%M", time.localtime()) + '.png'
         try:
             self.driver.get_screenshot_as_file(img_name)
-            log.info("截图保存为:%s"%file_path)
+            log.info("截图保存至:%s"%img_name)
         except Exception as e:
             log.error("截图失败:%s"%e)
 
     #检查元素的可用性
 
     def judge_element(self):
-        return self.Judge_element(self.driver)
+        '''
+        e.g. self.judge_element().presence_of_element_located((By.ID,"test"))
+        '''
+        return EC
 
-    class Judge_element():
+    def title_is(self,title):
+        '''
+        e.g. self.title_is("test")
+        返回true或false
+        '''
+        return EC.title_is(title)(self.driver)
 
+    def title_contains(self,title):
+        '''
+        title是否包含字段
+        e.g. self.title_contains("test")
+        返回true或false
+        '''
+        return EC.title_contains(title)(self.driver)
 
-        def __init__(self,driver):
-            self.driver = driver
+    def element_presence(self,*key):
+        '''
+        e.g. self.element_presence(By.ID,"test")
+        元素存在则返回webelement对象或false
+        '''
+        #元素存在则返回webelement对象
+        return EC.presence_of_element_located(key)(self.driver)
 
-        def 
+    def element_visibility(self,*key):
+        '''
+        e.g. self.element_visibility(By.ID,"test")
+        元素显示则返回webelement对象或false
+        '''
+        #元素显示则返回webelement对象
+        return EC.visibility_of_element_located(key)(self.driver)
 
-    
+    def url_contains(self,url):
+        return EC.url_contains(url)(self.driver)
+
+    def alert_is_present(self):
+        '''
+        e.g. self.alert_is_present()
+        弹出框显示则返回alert对象或false
+        '''
+        return EC.alert_is_present()(self.driver)
+
+    def click_alert(self):
+        try:
+            self.alert_is_present().accept()
+        except NoAlertPresentException:
+            raise
+
+    def dismiss_alert(self):
+        try:
+            self.alert_is_present().dismiss()
+        except NoAlertPresentException:
+            raise
+
+    #js脚本操作
+
+    def execute_js(self,js,*key):
+        '''
+        e.g. self.execute_js("window.scrollTo(0,0))
+        '''
+        if key:
+            log.info("对元素执行js脚本:%s"%js)
+            return self.driver.execute_script(js,self.find(*key))
+        else:
+            log.info("执行js脚本:%s"%js)
+            return self.driver.execute_script(js)
+
+    def execute_async_js(self,js,*key):
+        #异步执行
+        if key:
+            log.info("对元素执行js脚本:%s"%js)
+            return self.driver.execute_async_script(js,self.find(*key))
+        else:
+            log.info("执行js脚本:%s"%js)
+            return self.driver.execute_async_script(js)
