@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 from selenium.common.exceptions import *
 import time,os
+import json
 log = mylog.Log().getlog()
 
 class Basepage():
@@ -174,7 +175,7 @@ class Basepage():
         log.info("前进一个界面")
 
     def get_screenshot(self):
-        file_path = '../report/'+type(self).__name__+'/screenshot/'
+        file_path = os.path.join(os.path.dirname(os.path.dirname(__file__))+ '/report/'+type(self).__name__+'/screenshot/')
         if os.path.exists(file_path) and os.path.isdir(file_path):
             pass
         else:
@@ -268,3 +269,27 @@ class Basepage():
         else:
             log.info("执行js脚本:%s"%js)
             return self.driver.execute_async_script(js)
+
+    #cookies操作
+    def get_cookies(self):
+        return self.driver.get_cookies()
+
+    def save_cookies(self):
+        cookies = self.driver.get_cookies()
+        cookies_path = os.path.join(os.path.dirname(os.path.dirname(__file__))+ '/report/'+type(self).__name__+'/cookies/')
+        if os.path.exists(cookies_path):
+            pass
+        else:
+            os.makedirs(cookies_path)
+        cookies_file = cookies_path +'cookies.json'
+        with open(cookies_file,'w') as f:
+            json.dump(cookies,f)
+        log.info('cookies保存在:%s'%cookies_path)
+
+    def add_cookies(self):
+        cookies_file = os.path.join(os.path.dirname(os.path.dirname(__file__))+ '/report/'+type(self).__name__+'/cookies/') +'cookies.json'
+        with open(cookies_file,'w') as f :
+            cookies = json.load(f)
+            for cookie in cookies:
+                self.driver.add_cookie(cookie)
+        log.info('cookies加载成功:%s'%cookies_file)

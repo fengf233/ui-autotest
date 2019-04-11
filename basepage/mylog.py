@@ -20,7 +20,7 @@ class Log():
         if os.path.exists(self.log_path) and os.path.isdir(self.log_path):
             pass
         else:
-            os.mkdir(self.log_path)
+            os.makedirs(self.log_path)
         self.log_name = os.path.join(self.log_path + self.log_time)
 
         #因为多出调用logger会生成多个handlers,所以每次调用清空handler
