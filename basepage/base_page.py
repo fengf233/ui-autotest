@@ -151,8 +151,8 @@ class Basepage():
         try:
             self.find(*key).click()
             log.info('点击元素：%s' %key[1])
-        except:
-            log.error("无法点击元素")
+        except Exception as e:
+            log.error("无法点击元素:\n%s"%e)
             raise
 
     def send_key(self,key,text):
@@ -164,8 +164,8 @@ class Basepage():
         log.info('输入内容: %s' %text)
         try:
             self.find(*key).send_keys(text)
-        except:
-            log.error("输入内容失败")
+        except Exception as e:
+            log.error("输入内容失败,原因为:%s"%e)
             raise
     
     def clear(self,*key):
@@ -368,3 +368,44 @@ class Basepage():
         action.move_to_element(element).click(element).perform()
         '''
         return ActionChains(self.driver)
+
+    def play_video(self,*key,playtime=0):
+        '''
+        只针对html5的<video>元素,建议直接使用self.click(*key)播放视频更方便
+
+        e.g.
+        self.play_video(By.XPATH,"//video")
+        '''
+        video = self.find(*key)
+        if video.tag_name == "video":
+            video_url = self.driver.execute_script("return arguments[0].currentSrc;",video)
+            log.info("播放视频地址为:%s"%video_url)
+            try:
+                self.driver.execute_script("return arguments[0].play()",video)
+                log.info("开始播放视频")
+            except Exception as e:
+                log.error("播放视频失败:%s"%e)
+                raise
+            if playtime !=0:
+                time.sleep(playtime)
+                log.info("播放时长:%s秒"%playtime)
+                self.driver.execute_script("return arguments[0].pause()",video)
+                log.info("停止播放")
+        else:
+            log.error("不是<video>元素,不能播放")
+
+
+    def stop_video(self,*key):
+        '''
+        只针对html5的<video>元素,建议直接使用self.click(*key)播放视频更方便
+
+        e.g.
+        self.stop_video(By.XPATH,"//video")
+        '''
+        video = self.find(*key)
+        if video.tag_name == "video":
+            video_url = self.driver.execute_script("return arguments[0].currentSrc;",video)
+            self.driver.execute_script("return arguments[0].pause()",video)
+            log.info("停止播放:%s"%video_url)
+        else:
+            log.error("不是<video>元素")
