@@ -1,0 +1,24 @@
+[INFO][2019-04-26 13:30:15,360] [test.py]->[test_1] line:24 ---> ----------开始测试1
+[INFO][2019-04-26 13:30:15,699] [base_page.py]->[get_screenshot] line:231 ---> 截图保存至:d:\测试脚本\ui-autotest/report/Baidu/screenshot/2019-04-26-1330.png
+[INFO][2019-04-26 13:30:19,492] [baidu.py]->[get_start] line:16 ---> 开始播放
+[INFO][2019-04-26 13:30:19,495] [base_page.py]->[presence] line:81 ---> 等待元素出现: //video[@preload='auto']
+[INFO][2019-04-26 13:30:19,815] [base_page.py]->[get_screenshot] line:231 ---> 截图保存至:d:\测试脚本\ui-autotest/report/Baidu/screenshot/2019-04-26-1330.png
+[INFO][2019-04-26 13:30:19,815] [base_page.py]->[sleep] line:124 ---> 界面等待10秒
+[INFO][2019-04-26 13:30:29,816] [base_page.py]->[find] line:39 ---> 查找元素: //video[@preload='auto']
+[INFO][2019-04-26 13:30:29,914] [base_page.py]->[click] line:153 ---> 点击元素：//video[@preload='auto']
+[INFO][2019-04-26 13:30:29,914] [base_page.py]->[sleep] line:124 ---> 界面等待10秒
+[INFO][2019-04-26 13:30:39,916] [baidu.py]->[get_start] line:22 ---> 停止播放
+[INFO][2019-04-26 13:30:39,916] [base_page.py]->[find] line:39 ---> 查找元素: //video[@preload='auto']
+[INFO][2019-04-26 13:30:40,039] [base_page.py]->[click] line:153 ---> 点击元素：//video[@preload='auto']
+[INFO][2019-04-26 13:30:47,915] [test.py]->[test_2] line:32 ---> ----------开始测试2
+[INFO][2019-04-26 13:30:48,223] [base_page.py]->[get_screenshot] line:231 ---> 截图保存至:d:\测试脚本\ui-autotest/report/Baidu/screenshot/2019-04-26-1330.png
+[INFO][2019-04-26 13:30:52,854] [baidu.py]->[get_start] line:16 ---> 开始播放
+[INFO][2019-04-26 13:30:52,855] [base_page.py]->[presence] line:81 ---> 等待元素出现: //video[@preload='auto']
+[INFO][2019-04-26 13:30:53,286] [base_page.py]->[get_screenshot] line:231 ---> 截图保存至:d:\测试脚本\ui-autotest/report/Baidu/screenshot/2019-04-26-1330.png
+[INFO][2019-04-26 13:30:53,287] [base_page.py]->[sleep] line:124 ---> 界面等待10秒
+[INFO][2019-04-26 13:31:03,288] [base_page.py]->[find] line:39 ---> 查找元素: //video[@preload='auto']
+[INFO][2019-04-26 13:31:03,404] [base_page.py]->[click] line:153 ---> 点击元素：//video[@preload='auto']
+[INFO][2019-04-26 13:31:03,405] [base_page.py]->[sleep] line:124 ---> 界面等待10秒
+[INFO][2019-04-26 13:31:13,406] [baidu.py]->[get_start] line:22 ---> 停止播放
+[INFO][2019-04-26 13:31:13,407] [base_page.py]->[find] line:39 ---> 查找元素: //video[@preload='auto']
+[INFO][2019-04-26 13:31:13,520] [base_page.py]->[click] line:153 ---> 点击元素：//video[@preload='auto']
