@@ -1,0 +1,30 @@
+[INFO][2019-05-07 14:03:28,362] [test_baidu.py]->[test_1] line:29 ---> ----------开始测试1
+[INFO][2019-05-07 14:03:28,646] [base_page.py]->[get_screenshot] line:231 ---> 截图保存至:d:/测试脚本/ui-autotest/report/Baidu/screenshot/2019-05-07-1403.png
+[INFO][2019-05-07 14:03:35,279] [baidu.py]->[get_start] line:18 ---> 访问主页
+[INFO][2019-05-07 14:03:35,283] [base_page.py]->[presence] line:81 ---> 等待元素出现: //input[@id='kw']
+[INFO][2019-05-07 14:03:35,585] [base_page.py]->[get_screenshot] line:231 ---> 截图保存至:d:/测试脚本/ui-autotest/report/Baidu/screenshot/2019-05-07-1403.png
+[INFO][2019-05-07 14:03:35,585] [base_page.py]->[send_key] line:162 ---> 清空输入框内容
+[INFO][2019-05-07 14:03:35,586] [base_page.py]->[find] line:39 ---> 查找元素: //input[@id='kw']
+[INFO][2019-05-07 14:03:35,914] [base_page.py]->[send_key] line:164 ---> 输入内容: baidu
+[INFO][2019-05-07 14:03:35,915] [base_page.py]->[find] line:39 ---> 查找元素: //input[@id='kw']
+[INFO][2019-05-07 14:03:36,665] [base_page.py]->[sleep] line:124 ---> 界面等待10秒
+[INFO][2019-05-07 14:03:46,668] [base_page.py]->[find] line:39 ---> 查找元素: //input[@id='su']
+[INFO][2019-05-07 14:03:46,742] [base_page.py]->[click] line:153 ---> 点击元素：//input[@id='su']
+[INFO][2019-05-07 14:03:46,743] [base_page.py]->[sleep] line:124 ---> 界面等待10秒
+[INFO][2019-05-07 14:03:56,745] [baidu.py]->[get_start] line:25 ---> 查找
+[INFO][2019-05-07 14:03:57,072] [base_page.py]->[get_screenshot] line:231 ---> 截图保存至:d:/测试脚本/ui-autotest/report/Baidu/screenshot/2019-05-07-1403.png
+[INFO][2019-05-07 14:04:06,268] [test_baidu.py]->[test_2] line:37 ---> ----------开始测试2
+[INFO][2019-05-07 14:04:06,583] [base_page.py]->[get_screenshot] line:231 ---> 截图保存至:d:/测试脚本/ui-autotest/report/Baidu/screenshot/2019-05-07-1404.png
+[INFO][2019-05-07 14:04:12,845] [baidu.py]->[get_start] line:18 ---> 访问主页
+[INFO][2019-05-07 14:04:12,845] [base_page.py]->[presence] line:81 ---> 等待元素出现: //input[@id='kw']
+[INFO][2019-05-07 14:04:13,156] [base_page.py]->[get_screenshot] line:231 ---> 截图保存至:d:/测试脚本/ui-autotest/report/Baidu/screenshot/2019-05-07-1404.png
+[INFO][2019-05-07 14:04:13,157] [base_page.py]->[send_key] line:162 ---> 清空输入框内容
+[INFO][2019-05-07 14:04:13,157] [base_page.py]->[find] line:39 ---> 查找元素: //input[@id='kw']
+[INFO][2019-05-07 14:04:13,182] [base_page.py]->[send_key] line:164 ---> 输入内容: baidu
+[INFO][2019-05-07 14:04:13,183] [base_page.py]->[find] line:39 ---> 查找元素: //input[@id='kw']
+[INFO][2019-05-07 14:04:13,306] [base_page.py]->[sleep] line:124 ---> 界面等待10秒
+[INFO][2019-05-07 14:04:23,306] [base_page.py]->[find] line:39 ---> 查找元素: //input[@id='su']
+[INFO][2019-05-07 14:04:23,386] [base_page.py]->[click] line:153 ---> 点击元素：//input[@id='su']
+[INFO][2019-05-07 14:04:23,387] [base_page.py]->[sleep] line:124 ---> 界面等待10秒
+[INFO][2019-05-07 14:04:33,389] [baidu.py]->[get_start] line:25 ---> 查找
+[INFO][2019-05-07 14:04:33,718] [base_page.py]->[get_screenshot] line:231 ---> 截图保存至:d:/测试脚本/ui-autotest/report/Baidu/screenshot/2019-05-07-1404.png

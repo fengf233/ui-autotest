@@ -12,7 +12,7 @@ class Log():
     def __init__(self,logger="mylog"):
         self.logger = logging.getLogger(logger)
         self.logger.setLevel(logging.DEBUG)
-        self.log_time = "\\"+time.strftime("%Y-%m-%d", time.localtime())+".log"
+        self.log_time = "\\"+time.strftime("%Y-%m-%d_%H_%M", time.localtime())+".log"
         # 在进程路径创建log文件夹
         # self.log_path = os.path.join(os.getcwd() + "\\log")
         # 固定在mylog上一级创建

@@ -32,7 +32,7 @@ import os,time
 
 log = mylog.Log().getlog()
 
-class %(test_name)s(unittest.TestCase):
+class test_%(test_name)s(unittest.TestCase):
 
     def setUp(self):
         pass
@@ -46,7 +46,7 @@ class %(test_name)s(unittest.TestCase):
 
 if __name__=="__main__":
 
-    filePath = os.path.dirname(os.path.dirname(__file__))+'/report/'+time.strftime("%%Y-%%m-%%d", time.localtime())+'%(test_name)s.html'
+    filePath = os.path.dirname(os.path.dirname(__file__))+'/report/'+time.strftime("%%Y-%%m-%%d", time.localtime())+'_%(test_name)s.html'
     testsuit = unittest.TestSuite()
     testsuit.addTest(%(test_name)s('test_1'))
     fp = open(filePath,'wb')
